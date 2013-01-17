@@ -1,0 +1,27 @@
+# Puppet generated file
+# main config
+topicprefix = /topic/
+libdir = /usr/libexec/mcollective
+logfile = /var/log/mcollective.log
+daemonize = 1
+keeplogs = 1
+max_log_size = 10240
+loglevel = debug
+identity = <%= hname %>
+registerinterval = 300
+classesfile = /var/lib/puppet/classes.txt
+
+# connector plugin config
+connector = stomp
+plugin.stomp.host = puppet.podzinger.local
+plugin.stomp.port = 61613
+plugin.stomp.user = mcollective
+plugin.stomp.password = rabbitMCrabbit
+
+# facts
+factsource = facter
+plugin.yaml = /etc/mcollective/facts.yaml
+
+# security plugin config
+securityprovider = psk
+plugin.psk = mcollectivePSKmcollective

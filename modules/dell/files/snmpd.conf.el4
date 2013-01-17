@@ -1,0 +1,35 @@
+# contact
+syslocation colo
+syscontact "noc@podzinger.com"
+
+# auth
+rocommunity zingro
+
+# disk monitoring
+disk /
+
+# proc monitoring
+proc sendmail
+proc httpd
+proc puppet
+proc nslcd
+proc nscd
+proc ntpd
+proc automount
+proc vsftpd
+proc nrpe
+proc snmpd
+proc sge_execd
+
+
+# .1.3.6.1.4.1.2021.8.1.101.1
+# RAID monitoring
+#exec raidchk /bin/sh /usr/local/noc/scripts/snmp_raidchk.sh
+exec raidchk /bin/sh /net/san/nfs0/home/monitor/noc/snmp/snmp_raidchk.sh
+# .1.3.6.1.4.1.2021.8.1.101.2
+# Zinger cron rsync block check
+#exec zinger_rsync_cron
+# .1.3.6.1.4.1.2021.8.1.101.3
+# Free disk space check
+exec spacechk /bin/sh /net/san/nfs0/home/monitor/noc/snmp/snmp_freedisk.sh
+

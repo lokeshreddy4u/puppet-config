@@ -1,0 +1,112 @@
+#!/bin/bash
+#
+# podzinger:    Start/stop podzinger agents service.
+#
+# chkconfig:    35 99 01
+# description:  The podzinger agents daemon.
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+export LANG=en_US.UTF-8
+command=/home/podzinger-4/bin/PodzingerAgents
+user=zinger
+
+base=`basename $0 | sed 's/^S[0-9][0-9]//'`
+pidfile=/var/run/$base.pid
+
+find_orphans()
+{
+        # Look for processes owned by init (PPID=1)
+        ps -fu$user --width=1000 | fgrep -v org.apache.catalina.startup.Bootstrap | fgrep -v /home/cloud- | fgrep -v /home/streamer- | fgrep -v /home/reporting | awk '{
+ print $3, $2 }' | grep "^1 " | awk '{ print $2 }'
+}
+
+try_kill_orphans()
+{
+        signal=$1
+        for orphan in `find_orphans`
+        do
+                kill $signal $orphan >/dev/null 2>&1
+        done
+        sleep 2
+
+        # A return of true (0) means all orphans were killed.
+        [ -z "`find_orphans`" ]
+}
+
+kill_orphans()
+{
+        for signal in -INT -INT -TERM -TERM -HUP -HUP -KILL -KILL
+        do
+                echo -n "."
+                try_kill_orphans $signal && break
+        done
+        # Our return status is the same as the last try_kill_orphans.
+        # A return of true (0) means all orphans were killed.
+}
+
+start()
+{
+        [ -e $pidfile ] && checkpid `cat $pidfile` && echo "$base service is already running" && return 0
+
+        echo -n "Starting $base service"
+        ( runuser - $user -c "umask 022 ; $command & echo "'$!'" >&3" 3>$pidfile 2>&1 | logger -t $base ) </dev/null >/dev/null 2>&1 &
+        sleep 10
+
+        [ -e $pidfile ] && checkpid `cat $pidfile` && success "$base startup" || failure "$base startup"
+        echo ""
+        [ -e $pidfile ] && checkpid `cat $pidfile`
+}
+
+stop()
+{
+        [ ! -e $pidfile ] && echo "$base service is already stopped" && return 0
+
+        echo -n "Stopping $base service"
+        pid=`cat $pidfile`
+        kill -TERM $pid >/dev/null 2>&1
+
+        for n in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+        do
+                sleep 3
+                if checkpid $pid
+                then
+                        echo -n "."
+                else
+                        kill_orphans && rm $pidfile
+                        break
+                fi
+        done
+
+        [ ! -e $pidfile ] && success "$base shutdown" || failure "$base shutdown"
+        echo ""
+        [ ! -e $pidfile ]
+}
+
+status()
+{
+        [ -e $pidfile ] && checkpid `cat $pidfile` && echo "$base service is running" || echo "$base service is stopped"
+}
+
+
+case "$1" in
+  start)
+        start
+        ;;
+  restart)
+        (stop || stop) && start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status
+        ;;
+  *)
+        echo "Usage: $base {start|restart|stop|status}"
+        exit 1
+        ;;
+esac
+

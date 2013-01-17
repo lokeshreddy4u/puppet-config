@@ -1,0 +1,62 @@
+class rampconfig::cron.bak {
+
+case $operatingsystemrelease {
+        /^5.*/, /^6.*/: {
+
+file { "puppet.cron":
+    path    => "/etc/cron.d/puppet.cron",
+    ensure  => present,
+    owner   => "root",
+    group   => "root",
+    mode    => 0644,
+    require => [
+                Package["puppet"],
+                Service["puppet"]
+               ],
+    content => "0 */2 * * * root /etc/init.d/puppet stop && /etc/init.d/puppet start > /dev/null 2>&1\n";
+}
+
+file { "mcollective.cron":
+    path    => "/etc/cron.d/mcollective.cron",
+    ensure  => present,
+    owner   => "root",
+    group   => "root",
+    mode    => 0644,
+    require => [
+                Package["mcollective"],
+                Service["mcollective"]
+               ],
+    content => "5 */2 * * * root /etc/init.d/mcollective stop && /etc/init.d/mcollective start > /dev/null 2>&1\n";
+}
+}
+
+default: { 
+file { "puppet.cron":
+    path    => "/etc/cron.d/puppet.cron",
+    ensure  => present,
+    owner   => "root",
+    group   => "root",
+    mode    => 0644,
+    require => [
+                Package["pe-puppet"],
+                Service["pe-puppet"]
+               ],
+    content => "#0 */23 * * * root /etc/init.d/pe-puppet stop && /etc/init.d/pe-puppet start > /dev/null 2>&1\n";
+}
+
+file { "mcollective.cron":
+    path    => "/etc/cron.d/mcollective.cron",
+    ensure  => present,
+    owner   => "root",
+    group   => "root",
+    mode    => 0644,
+    require => [
+                Package["pe-mcollective"],
+                Service["pe-mcollective"]
+               ],
+    content => "#5 */23 * * * root /etc/init.d/pe-mcollective stop && /etc/init.d/pe-mcollective start > /dev/null 2>&1\n";
+}
+}
+
+}
+}

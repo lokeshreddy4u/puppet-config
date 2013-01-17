@@ -1,0 +1,25 @@
+# Puppet generated file
+
+[main]
+    logdir = /var/log/puppet
+    rundir = /var/run/puppet
+    ssldir = $vardir/ssl
+    server = puppet.corp.sensata.com
+    vardir = /var/lib/puppet
+    modulepath = /etc/puppet/modules
+    user = puppet
+    group = puppet
+    archive_files = true
+    archive_file_server = puppet
+    pluginsync = true
+
+[agent]
+    certname = <%= hname %>
+    server = puppet.podzinger.local
+    report = true
+    classfile = $vardir/classes.txt
+    localconfig = $vardir/localconfig
+    graph = true
+    pluginsync = true
+    runinterval = 600
+    pluginsync = false

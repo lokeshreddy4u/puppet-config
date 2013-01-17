@@ -1,0 +1,8 @@
+# Puppet generated configuration - Don't edit manually
+restrict default nomodify notrap noquery
+restrict 127.0.0.1
+server ntp1.podzinger.local
+server ntp2.podzinger.local
+driftfile /var/lib/ntp/drift
+broadcastdelay  0.008
+keys            /etc/ntp/keys

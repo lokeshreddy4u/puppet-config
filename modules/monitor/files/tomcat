@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Startup script for Tomcat
+
+# chkconfig: 35 71 01
+# description: tomcat Java web server
+#
+
+export JAVA_HOME=/usr/java/jre1.5.0_06
+export CATALINA_HOME=/home/tomcat
+export LANG=en_US.UTF-8
+
+start_tomcat=/home/tomcat/bin/startup.sh
+stop_tomcat=/home/tomcat/bin/shutdown.sh
+
+# </dev/null because one of the start scripts tries to read from the
+# terminal, causing this to hang on boot until you type Enter.
+start() {
+        echo -n "Starting tomcat: "
+        su -c ${start_tomcat} zinger </dev/null
+        echo "done."
+}
+stop() {
+        echo -n "Shutting down tomcat: "
+        su -c ${stop_tomcat} zinger
+        echo "done."
+}
+
+# See how we were called
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        stop
+        sleep 10
+        start
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+esac
+
+exit 0
+

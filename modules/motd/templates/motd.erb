@@ -1,0 +1,21 @@
+<%= operatingsystem %> <%= operatingsystemrelease %> <%= architecture %>
+
+Server Owner:	RAMP Holdings
+FQDN:      	<%= fqdn %>         (<%= ipaddress %>)
+<% if has_variable?("processor0") then -%>
+Processor: 	<%= processorcount %>x <%= processor0 %>
+<% end -%>
+Kernel:    	<%= kernelrelease %>
+Memory:    	<%= memorysize %>
+Uptime:	   	<%= uptime %>
+
++-----------------------------------------------------------------------+
+|	     *** Unauthorized Use or Access Prohibited ***		|
+|									|
+|	          * For Authorised Official Use Only *			|
+|	     You must have explicit permission to access or		|
+|	     configure this device. All activities performed		|
+|	     on this device may be logged, and violations of		|
+|	   this policy may result in disciplinary action, and		|
+|	     may be reported to law enforcement authorities.		|
++-----------------------------------------------------------------------+

@@ -1,0 +1,10 @@
+/var/log/mcollective/*log {
+  missingok
+  notifempty
+  create 0644 puppet puppet
+  sharedscripts
+  postrotate
+    [ -e /etc/init.d/mcollective ] && /etc/init.d/mcollective reload > /dev/null 2>&1 || true
+  endscript
+}
+

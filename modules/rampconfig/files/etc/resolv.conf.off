@@ -1,0 +1,5 @@
+# Puppet Generated Config - Don't edit below file
+search podzinger.local
+domain podzinger.local
+nameserver 192.168.54.22
+nameserver 192.168.54.23

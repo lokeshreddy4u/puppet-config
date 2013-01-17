@@ -1,0 +1,51 @@
+# Puppet generated file
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1       localhost.localdomain localhost
+192.168.17.40   fasta-admin01.podzinger.local
+192.168.17.11   fasta-admin02.podzinger.local
+192.168.17.42   fasta-search01.podzinger.local
+192.168.17.13   fasta-search02.podzinger.local
+192.168.17.14   fasta-search03.podzinger.local
+192.168.17.15   fasta-search04.podzinger.local
+192.168.17.16   fasta-search05.podzinger.local
+192.168.17.17   fasta-search06.podzinger.local
+192.168.17.18   fasta-search07.podzinger.local
+192.168.17.19   fasta-search08.podzinger.local
+192.168.17.20   fasta-search09.podzinger.local
+192.168.17.21   fasta-search10.podzinger.local
+192.168.17.22   fasta-search11.podzinger.local
+192.168.17.23   fasta-search12.podzinger.local
+192.168.17.24   fastb-admin01.podzinger.local
+192.168.17.25   fastb-admin02.podzinger.local
+192.168.17.26   fastb-search01.podzinger.local
+192.168.17.27   fastb-search02.podzinger.local
+192.168.17.28   fastb-search03.podzinger.local
+192.168.17.29   fastb-search04.podzinger.local
+192.168.17.30   fastb-search05.podzinger.local
+192.168.17.31   fastb-search06.podzinger.local
+192.168.17.32   fastb-search07.podzinger.local
+192.168.17.33   fastb-search08.podzinger.local
+192.168.17.34   fastb-search09.podzinger.local
+192.168.17.35   fastb-search10.podzinger.local
+192.168.17.36   fastb-search11.podzinger.local
+192.168.17.37   fastb-search12.podzinger.local
+192.168.24.202  ldap.podzinger.local
+192.168.17.54 fastc-search01.podzinger.local
+192.168.17.55 fastc-search02.podzinger.local
+192.168.17.56 fastc-search03.podzinger.local
+192.168.17.65 fastd-search01.podzinger.local
+192.168.17.66 fastd-search02.podzinger.local
+192.168.17.67 fastd-search03.podzinger.local
+192.168.17.76 faste-search01.podzinger.local
+192.168.17.87 fastf-search01.podzinger.local
+192.168.17.52 fast-hearst1.podzinger.local
+192.168.17.53 fast-hearst2.podzinger.local
+192.168.17.98 fastg-search01.podzinger.local
+192.168.17.99 fastg-search02.podzinger.local
+192.168.17.109 fasth-search01.podzinger.local
+192.168.17.110 fasth-search02.podzinger.local
+192.168.17.115 fasti-search01.podzinger.local
+192.168.17.116 fasti-search02.podzinger.local
+192.168.17.120 fastj-search01.podzinger.local
+
