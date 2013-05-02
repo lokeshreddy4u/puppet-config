@@ -1,0 +1,14 @@
+yum remove $(rpm -qa | grep srvadmin)
+rm -fr /opt/dell/srvadmin/
+rm -fr /usr/libexec/dell_dup
+rm -fr /usr/share/firmware/dell/
+
+Then just reinstall /upgrade the whole thing:
+
+yum install srvadmin-all
+yum install dell_ft_install
+yum install $(bootstrap_firmware)
+
+And update the firmware:
+
+update_firmware --yes
